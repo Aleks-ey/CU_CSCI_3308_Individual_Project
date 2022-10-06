@@ -1,0 +1,72 @@
+<%- include ('../partials/header') %>
+<body>
+	<%- include ('../partials/menu') %>
+    <main>
+        <div class="bg-dark">
+            <div class="container-fluid" style="padding: 2%; ">
+                <form class="" action="/get_feed" method="post">
+                <div class="row">
+                    <div class="col-3">
+        
+                    </div>
+                    <div class="col-5">
+                    <input class="form-control" type="text" name="Artist" placeholder="Enter Artist Name">
+                    </div>
+                    <div class="col-1">
+                    <input class="btn btn-light" type="submit" name="Submit" value = "Submit"/>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+        <form class="" action="/saveReview" method="post">
+        <div>
+            <% if (error) { %>
+                <div class="alert alert-danger"><%- message %></div>
+            <% } %>
+            <%
+            if (items) {
+                var cards = '';
+                cards += '<div class="card"><div class="card-body"><div><img class="card-img-top" src="' + Object.values(items[0])[43] + '"></div><div style="align-content: center; margin-top: 10px; margin-bottom: 5px;"><button type="button" class="btn btn-primary" onclick="location.href=' + Object.values(items[0])[13] + '">' + Object.values(items[0])[13] + '</button><button type="button" class="btn btn-primary" style="margin-left: 10px;" data-toggle="modal" data-target="#reviewModal" data-whatever="@mdo">Add review</button></div><p id="nameA" name="nameA" class="card-text">' + Object.values(items[0])[1] + '</p><p class="card-text">' + Object.values(items[0])[6] + '</p><p class="card-text">' + Object.values(items[0])[11] + '</p><p class="card-text">' + Object.values(items[0])[16] + '</p></div></div>'
+            %>
+                <%- cards %>
+                <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form action="/saveReview" method="post">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="reviewModalLabel">Leave a review</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="artist-name" class="col-form-label">Artist:</label>
+                                        <input type="read" class="form-control" id="artistN" name="artistN" value="<%- Object.values(items[0])[1] %>" placeholder="<%- Object.values(items[0])[1] %>" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="review-text" class="col-form-label">Enter your review here:</label>
+                                        <textarea name="reviewTxt" class="form-control" id="review-text"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                
+                                <button type="submit" class="btn btn-primary" onclick="location.href='pages/review'">Submit</button>
+                                
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <% } %>  
+        </div>
+    </form>
+    </main>
+</body>
+<footer>
+    <%- include('../partials/footer') %>
+</footer>

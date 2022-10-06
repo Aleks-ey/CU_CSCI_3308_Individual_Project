@@ -1,0 +1,45 @@
+<%- include ('../partials/header') %>
+<body>
+	<%- include ('../partials/menu') %>
+    <main>
+        <div class="container-fluid" style="padding: 2%; ">
+            <div style="text-align: center;"><h1>Artist Reviews</h1></div>
+            <form class="" action="" method="">
+            <div class="row">
+                <div class="col-3">
+                    
+                </div>
+                <div class="col-5">
+                <input class="form-control" type="text" name="ReviewSearch" placeholder="Enter Artist Name">
+                </div>
+                <div class="col-1">
+                <input class="btn btn-light" type="submit" name="Submit" value = "Submit"/>
+                </div>
+            </div>
+            </form>
+        </div>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Artist</th>
+                <th scope="col">Review</th>
+                <th scope="col">Review Date</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% for(var i = 0; i < allArtists.length; i++)
+				{
+                     var item = '';
+                        item += `<th scope="row">` + allArtists[i].artist_name + `</th><td>` + allArtists[i].review +` </td><td>` + allArtists[i].created +` </td>`;
+                %>
+                    <tr>
+                        <%- item %>
+                    </tr>
+                <% } %>
+            </tbody>
+          </table>
+    </main>
+</body>
+<footer>
+    <%- include('../partials/footer') %>
+</footer>
